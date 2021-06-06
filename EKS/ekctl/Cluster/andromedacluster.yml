@@ -1,0 +1,73 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+metadata:
+  name: andromeda-cluster
+  region: us-east-1
+  version: "1.20"
+# availabilityZones: ['us-east-1a', 'us-east-1b', 'us-east-1c', 'us-east-1d']
+# managedNodeGroups:
+#   - name: ng-v1
+#     launchTemplate:
+#       id: lt-03d0f8af7fe427ca6
+#       version: "2"
+#     labels:
+#       apptype: stateless
+#       instancetype: spot
+#       type: ng-v1
+#     tags:
+#       apptype: stateless
+#       instancetype: spot
+#       type: ng-v1
+#       k8s.io/cluster-autoscaler/node-template/label/apptype: stateless
+#       k8s.io/cluster-autoscaler/node-template/label/instancetype: spot
+#       k8s.io/cluster-autoscaler/node-template/label/type: ng-v1
+#     spot: true
+#     minSize: 1
+#     maxSize: 2
+#     desiredCapacity: 1
+#     privateNetworking: false
+availabilityZones: ['us-east-1a', 'us-east-1b', 'us-east-1c', 'us-east-1d']
+nodeGroups:
+  - name: ng-v1
+    labels:
+      apptype: stateless
+      instancetype: ondemand
+      type: ng-v1
+    tags:
+      apptype: stateless
+      instancetype: ondemand
+      type: ng-v1
+      k8s.io/cluster-autoscaler/node-template/label/apptype: stateless
+      k8s.io/cluster-autoscaler/node-template/label/instancetype: ondemand
+      k8s.io/cluster-autoscaler/node-template/label/type: ng-v1
+    minSize: 1
+    maxSize: 3
+    desiredCapacity: 2
+    instanceType: "t2.micro"
+    # instancesDistribution:
+    #   instanceTypes: ["t2.micro"]
+    #   onDemandBaseCapacity: 0
+    #   onDemandPercentageAboveBaseCapacity: 100
+    privateNetworking: false
+    ssh: 
+      allow: true
+      publicKeyName: andr
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+    kubeletExtraConfig:
+        kubeReserved:
+            cpu: "200m"
+            memory: "200Mi"
+            ephemeral-storage: "300Mi"
+        kubeReservedCgroup: "/kube-reserved"
+        systemReserved:
+            cpu: "200m"
+            memory: "200Mi"
+            ephemeral-storage: "300Mi"
+        evictionHard:
+            memory.available:  "100Mi"
+            nodefs.available: "10%"
+        featureGates:
+            TaintBasedEvictions: true
+            RotateKubeletServerCertificate: true
