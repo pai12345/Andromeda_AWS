@@ -1,0 +1,39 @@
+// {
+//     "Version" : "2012-10-17",
+//     "Statement" : [
+//       {
+//         "Action" : "sts:AssumeRole",
+//         "Effect" : "Allow",
+//         "Sid"    : "",
+//         "Principal" : {
+//             "Service" : "*"
+//         }
+//       }
+//     ]
+// }
+
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::651619448387:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/3739F24680EED60D0D54EF25DFB100D9"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "oidc.eks.us-east-1.amazonaws.com/id/3739F24680EED60D0D54EF25DFB100D9:sub": "system:serviceaccount:game-2048:aws-load-balancer-controller"
+        }
+      }
+    },
+    {
+      "Action" : "sts:AssumeRole",
+      "Effect" : "Allow",
+      "Sid"    : "",
+      "Principal" : {
+          "Service" : "*"
+      }
+    }
+  ]
+}

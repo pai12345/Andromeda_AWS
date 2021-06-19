@@ -1,0 +1,18 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: {{ .Release.Name }}-ebs-stc
+  namespace: dev
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "false"
+  labels:
+    name: {{ .Release.Name }}-ebs-stc
+    tier: databases
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  type: gp2
+  fsType: ext4
+  encrypted: "false"
+reclaimPolicy: Delete
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer

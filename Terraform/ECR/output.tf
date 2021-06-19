@@ -1,4 +1,4 @@
-#===================Output Module generate_vpc=====================#
+#===================Output Module generate_ecr=====================#
 output output_generate_ecr {
     value=module.generate_ecr
     sensitive = false
