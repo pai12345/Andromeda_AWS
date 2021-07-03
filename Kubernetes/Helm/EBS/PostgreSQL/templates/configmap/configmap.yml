@@ -6,6 +6,7 @@ metadata:
   labels:
     name: {{ .Release.Name }}-postgresql-configmap
     tier: database
+immutable: true
 data:
   POSTGRES_DB: postgresdb
   POSTGRES_USER: postgresadmin

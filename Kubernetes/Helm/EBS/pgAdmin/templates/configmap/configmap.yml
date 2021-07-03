@@ -6,6 +6,7 @@ metadata:
   labels:
     name: {{ .Release.Name }}-pgadmin-configmap
     tier: weba
+immutable: true
 data:
   PGADMIN_DEFAULT_EMAIL: admin
   PGADMIN_DEFAULT_PASSWORD: admin

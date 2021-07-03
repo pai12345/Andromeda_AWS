@@ -28,15 +28,12 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}-postgresql-configmap
-          # volumeMounts:
-          #   - mountPath: /var/lib/postgresql/data
-          #     name: postgredb
           volumeMounts:
             - name: {{ .Release.Name }}-ebs-volume
-              mountPath: /var/lib/postgresql/data
+              # mountPath: /var/lib/postgresql/data
+              mountPath: /var/lib/postgresql
+              subPath: data
       volumes:
-        # - name: postgredb
-        #   emptyDir: {} 
         - name: {{ .Release.Name }}-ebs-volume
           persistentVolumeClaim:
             claimName: {{ .Release.Name }}-ebs-pvc
