@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "andrlogbucket" {
   bucket = "andrlogbucket"
-  acl    = "private"
+  acl    = "log-delivery-write"
   force_destroy = "true"
   versioning {
     enabled = true
