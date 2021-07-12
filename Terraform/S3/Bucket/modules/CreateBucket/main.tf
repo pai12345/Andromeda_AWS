@@ -1,16 +1,3 @@
-resource "aws_s3_bucket" "andrlogbucket" {
-  bucket = "andrlogbucket"
-  acl    = "log-delivery-write"
-  force_destroy = "true"
-  versioning {
-    enabled = true
-  }
-  tags = {
-    Type        = "S3 Bucket"
-    Environment = "Andromeda"
-  }
-}
-
 resource "aws_s3_bucket" "andrterraformbackend" {
   bucket = "andrterraformbackend"
   acl    = "private"
@@ -19,7 +6,8 @@ resource "aws_s3_bucket" "andrterraformbackend" {
     enabled = true
   }
   logging {
-    target_bucket = aws_s3_bucket.andrlogbucket.id
+    # target_bucket = aws_s3_bucket.andrlogbucket.id
+    target_bucket = var.target_bucket
     target_prefix = "log/"
   }
   tags = {
