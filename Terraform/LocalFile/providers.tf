@@ -9,7 +9,7 @@ terraform {
     bucket = "andrterraformbackend"
     encrypt = true
     key    = "prod/terraform.tfstate"
-    dynamodb_table = "terraform-up-and-running-locks"
+    dynamodb_table = "terraform_locks"
     region = "us-east-1"
   }
 }

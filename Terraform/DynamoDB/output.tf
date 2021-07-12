@@ -1,6 +1,6 @@
 #===================Output Dynamo DB=====================#
 output output_terraform_locks {
-    value=module.generate_s3
+    value=aws_dynamodb_table.terraform_locks
     sensitive = false
     description = "Output for Dynamo DB"
 }
