@@ -28,7 +28,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEKSServicePolicy" {
 }
 
 resource "aws_eks_cluster" "aws_eks" {
-  name     = "andromeda_eks_cluster"
+  name     = "andromedaekscluster"
   role_arn = aws_iam_role.eks_cluster.arn
   version = "1.20"
   vpc_config {
@@ -82,7 +82,7 @@ resource "aws_eks_node_group" "node" {
   node_role_arn   = aws_iam_role.eks_nodes.arn
   subnet_ids      = ["subnet-f4f350b9", "subnet-434c501f"]
   capacity_type  = "SPOT"
-  instance_types = ["t2.micro"]
+  instance_types = ["t2.medium"]
   remote_access{
     ec2_ssh_key = "andr"
   }
