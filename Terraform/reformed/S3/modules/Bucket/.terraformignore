@@ -1,0 +1,16 @@
+# Cache and Config
+.vscode
+
+# git
+.git/
+.gitignore
+
+# terraform
+**.terraform/
+**.terraform.lock.hcl
+**.json
+
+# misc
+.DS_Store
+LICENSE.md
+README.md
