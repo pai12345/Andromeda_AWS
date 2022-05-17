@@ -30,7 +30,7 @@ resource "aws_iam_role_policy_attachment" "AmazonEKSServicePolicy" {
 resource "aws_eks_cluster" "aws_eks" {
   name     = "andromedaekscluster"
   role_arn = aws_iam_role.eks_cluster.arn
-  version = "1.20"
+  version = "1.22"
   vpc_config {
     endpoint_public_access = true
     public_access_cidrs = ["0.0.0.0/0"]
