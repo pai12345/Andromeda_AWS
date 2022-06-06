@@ -36,13 +36,43 @@ resource "aws_subnet" "subnet_create" {
   }
 }
 
+# create security group
+resource "aws_security_group" "secgrp_create" {
+  name        = "testgroup"
+  description = "set traffic rules"
+  vpc_id      = aws_vpc.vpc_create.id
+
+  ingress {
+    description = "Inbound Traffic"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = [aws_vpc.vpc_create.cidr_block]
+  }
+
+  egress {
+    description      = "Outbound Traffic"
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+
+  tags = {
+    type = "securitygroup"
+    name = "andromeda"
+  }
+}
+
 # create ec2
 resource "aws_instance" "ec2_create" {
-  ami               = data.aws_ami.ubuntu.id
-  instance_type     = "t2.micro"
+  ami                         = data.aws_ami.ubuntu.id
+  instance_type               = "t2.micro"
   associate_public_ip_address = true
-  subnet_id         = aws_subnet.subnet_create.id
-  availability_zone = "us-east-1a"
+  subnet_id                   = aws_subnet.subnet_create.id
+  vpc_security_group_ids      = [aws_security_group.secgrp_create.id]
+  availability_zone           = "us-east-1a"
   credit_specification {
     cpu_credits = "standard"
   }
