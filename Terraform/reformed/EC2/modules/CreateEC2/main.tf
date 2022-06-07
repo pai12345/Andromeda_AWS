@@ -47,7 +47,8 @@ resource "aws_security_group" "secgrp_create" {
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
-    cidr_blocks = [aws_vpc.vpc_create.cidr_block]
+    cidr_blocks = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
   }
 
   egress {
@@ -73,6 +74,7 @@ resource "aws_instance" "ec2_create" {
   subnet_id                   = aws_subnet.subnet_create.id
   vpc_security_group_ids      = [aws_security_group.secgrp_create.id]
   availability_zone           = "us-east-1a"
+  user_data = "${file("${path.module}/user_data/webserver.sh")}"
   credit_specification {
     cpu_credits = "standard"
   }
