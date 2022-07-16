@@ -6,7 +6,7 @@ variable "iam_user_name" {
 
 variable "iam_user_path" {
   type        = string
-  default     = "/system/"
+  default     = "/users/"
   description = "IAM user path"
 }
 
