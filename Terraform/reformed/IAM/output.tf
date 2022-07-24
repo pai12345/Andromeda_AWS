@@ -19,9 +19,9 @@ output "output_generate_add_user_group" {
   description = "Output for Module Add Users to Group"
 }
 
-#===================Module Output for attaching IAM Policy to Group=====================#
+/* #===================Module Output for attaching IAM Policy to Group=====================#
 output "output_generate_attach_group_policy" {
   value       = module.generate_attach_group_policy
   sensitive   = false
   description = "Output for attaching IAM Policy to Group"
-}
+} */

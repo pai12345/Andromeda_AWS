@@ -10,7 +10,14 @@
                 "aws-portal:ViewUsage"
             ],
             "Effect": "Allow",
-            "Resource": "*"
+            "Resource": "*",
+            "Condition": {
+                "ForAllValues:StringEquals": {
+                    "aws:TagKeys": [
+                        "user"
+                    ]
+                }
+            }
         }
     ]
 }
