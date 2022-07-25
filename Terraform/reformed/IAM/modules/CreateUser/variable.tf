@@ -19,3 +19,8 @@ variable "iam_user_tags" {
   }
   description = "IAM user name"
 }
+
+variable "permissions_boundary" {
+  type        = string
+  description = "IAM Permissions Boundary"
+}
