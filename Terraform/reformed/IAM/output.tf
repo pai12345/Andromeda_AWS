@@ -32,3 +32,17 @@ output "output_generate_attach_group_policy" {
   sensitive   = false
   description = "Output for attaching IAM Policy to Group"
 }
+
+#===================Module Output for generating IAM role for EC2 User=====================#
+output "output_generate_iam_ec2_role" {
+  value       = module.generate_iam_ec2_role
+  sensitive   = false
+  description = "Output for Module create IAM role for EC2 User"
+}
+
+#===================Module Output for generating IAM EC2 User Instance Profile=====================#
+output "output_generate_iam_instance_profile" {
+  value       = module.generate_iam_instance_profile
+  sensitive   = false
+  description = "Output for Module creating EC2 User Instance Profile"
+}

@@ -28,3 +28,15 @@ module "generate_attach_group_policy" {
   group_name = module.generate_iam_group.output_aws_iam_group.name
   policy     = file("${path.module}/policy_document/billingaccess.json")
 }
+
+# module to generate IAM role for EC2 User
+module "generate_iam_ec2_role" {
+  source = "./modules/CreateRole/"
+  policy = file("${path.module}/policy_document/iam_ec2_role.json")
+}
+
+# module to generate IAM EC2 User Instance Profile
+module "generate_iam_instance_profile" {
+  source = "./modules/EC2InstanceProfile/"
+  role   = module.generate_iam_ec2_role.output_create_role.name
+}

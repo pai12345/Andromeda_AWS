@@ -21,3 +21,9 @@ output "output_ec2_create" {
   description = "Output for EC2 Instance"
   value       = aws_instance.ec2_create
 }
+
+# Output for EC2
+output "output_ec2_instance_profile" {
+  description = "Output for EC2 Instance Profile"
+  value       = data.aws_iam_instance_profile.ec2_user_role
+}
