@@ -1,9 +1,16 @@
-
 #===================Output Fetch IAM Role for EKS=====================#
-output "output_fetch_eks_role" {
-  description = "Output for Fetching IAM Role for EKS"
-  value       = aws_iam_role.fetch_eks_role
+output "output_eks_cluster" {
+  description = "Output for Fetching IAM Role for EKS Cluster"
+  value       = aws_iam_role.eks_cluster
 }
+
+
+#===================Output Fetch IAM Role for EKS Nodegroup=====================#
+output "output_eks_nodes" {
+  description = "Output for Fetching IAM Role for EKS Nodegroup"
+  value       = aws_iam_role.eks_nodes
+}
+
 
 #===================Output Fetch AmazonEKSClusterPolicy=====================#
 output "output_fetch_AmazonEKSClusterPolicy" {
