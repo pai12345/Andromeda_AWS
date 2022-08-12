@@ -18,6 +18,14 @@
                     ]
                 }
             }
+        },
+        {
+            "Sid": "Stmt1658673730635",
+            "Action": [
+                "eks:*"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
         }
     ]
 }
