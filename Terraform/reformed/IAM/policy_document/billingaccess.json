@@ -22,7 +22,7 @@
         {
             "Sid": "Stmt1658673730635",
             "Action": [
-                "eks:*"
+                "eks:ListClusters"
             ],
             "Effect": "Allow",
             "Resource": "*"
