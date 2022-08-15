@@ -9,6 +9,9 @@
 **.tfstate.backup
 **.lock.hcl
 
+# json
+key.json
+
 # logs
 **.log
 
