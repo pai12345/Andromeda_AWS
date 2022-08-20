@@ -66,16 +66,10 @@ resource "aws_security_group" "secgrp_create" {
   }
 }
 
-# get iam instance profile for ec2 user
-data "aws_iam_instance_profile" "ec2_user_role" {
-  name = "ec2_user_profile"
-}
-
 # create ec2
 resource "aws_instance" "ec2_create" {
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = "t2.micro"
-  iam_instance_profile        = data.aws_iam_instance_profile.ec2_user_role.name
   associate_public_ip_address = true
   subnet_id                   = aws_subnet.subnet_create.id
   vpc_security_group_ids      = [aws_security_group.secgrp_create.id]
