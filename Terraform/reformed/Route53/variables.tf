@@ -1,4 +1,4 @@
 variable "bucketname" {
   description = "Bucket name"
-  default     = "www.testssdasdsasddasd.com"
+  default     = "test.andromedatest.click"
 }
