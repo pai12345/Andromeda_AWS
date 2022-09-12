@@ -32,3 +32,17 @@ output "output_lambda" {
   sensitive   = false
   description = "Output for creating API GATEWAY integration with lambda"
 }
+
+#===================Output for API Gateway REST API configuration snapshot=====================#
+output "output_gateway_deployment" {
+  value       = aws_api_gateway_deployment.gateway_deployment
+  sensitive   = false
+  description = "Output for API Gateway REST API configuration snapshot"
+}
+
+#===================Output for API Gateway create environment stage=====================#
+output "output_create_stage" {
+  value       = aws_api_gateway_stage.create_stage
+  sensitive   = false
+  description = "Output for API Gateway create environment stag"
+}

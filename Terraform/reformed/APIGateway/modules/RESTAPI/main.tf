@@ -33,3 +33,25 @@ resource "aws_api_gateway_integration" "lambda" {
   integration_http_method = var.integration_http_method
   uri                     = data.aws_lambda_function.lambda_function.invoke_arn
 }
+
+# api gateway deployment
+resource "aws_api_gateway_deployment" "gateway_deployment" {
+  rest_api_id = aws_api_gateway_rest_api.create_api.id
+  description = "API Gateway REST API configuration snapshot"
+  triggers = {
+    redeployment = sha1(jsonencode(aws_api_gateway_rest_api.create_api.body))
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+  depends_on = [
+    aws_api_gateway_method.get_method
+  ]
+}
+
+resource "aws_api_gateway_stage" "create_stage" {
+  deployment_id = aws_api_gateway_deployment.gateway_deployment.id
+  rest_api_id   = aws_api_gateway_rest_api.create_api.id
+  stage_name    = var.staging_env
+}

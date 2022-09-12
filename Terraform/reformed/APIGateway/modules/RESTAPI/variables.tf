@@ -39,3 +39,10 @@ variable "integration_http_method" {
   default     = "POST"
   description = "Integration http_method type"
 }
+
+# staging environment type
+variable "staging_env" {
+  type        = string
+  default     = "dev"
+  description = "Staging environment types"
+}
