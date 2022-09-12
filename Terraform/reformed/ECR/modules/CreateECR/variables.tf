@@ -1,6 +1,6 @@
 variable "reponame" {
   description = "ECR Repository name"
-  default     = "mytestrepopai1"
+  default     = "andromeda_ecr"
 }
 
 variable "immutable" {
@@ -16,6 +16,12 @@ variable "scan" {
 variable "encryptiontype" {
   description = "ECR image encryption type"
   default     = "AES256"
+}
+
+variable "force_delete" {
+  type        = bool
+  description = "Force Delete Repository"
+  default     = true
 }
 
 variable "tags" {

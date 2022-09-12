@@ -2,6 +2,7 @@
 resource "aws_ecr_repository" "create_repo" {
   name                 = var.reponame
   image_tag_mutability = var.immutable
+  force_delete         = var.force_delete
   encryption_configuration {
     encryption_type = var.encryptiontype
   }
