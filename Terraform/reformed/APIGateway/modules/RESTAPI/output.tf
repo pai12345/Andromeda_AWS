@@ -40,6 +40,20 @@ output "output_gateway_deployment" {
   description = "Output for API Gateway REST API configuration snapshot"
 }
 
+#===================Output for API Gateway Method for root=====================#
+output "output_proxy_root" {
+  value       = aws_api_gateway_method.proxy_root
+  sensitive   = false
+  description = "Output for API Gateway Method for root"
+}
+
+#===================Output for creating API GATEWAY integration with lambda root=====================#
+output "output_lambda_root" {
+  value       = aws_api_gateway_integration.lambda_root
+  sensitive   = false
+  description = "Output for creating API GATEWAY integration with lambda root"
+}
+
 #===================Output for API Gateway create environment stage=====================#
 output "output_create_stage" {
   value       = aws_api_gateway_stage.create_stage

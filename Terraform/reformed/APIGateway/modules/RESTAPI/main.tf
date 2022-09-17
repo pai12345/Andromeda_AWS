@@ -34,6 +34,33 @@ resource "aws_api_gateway_integration" "lambda" {
   uri                     = data.aws_lambda_function.lambda_function.invoke_arn
 }
 
+
+resource "aws_api_gateway_stage" "create_stage" {
+  deployment_id = aws_api_gateway_deployment.gateway_deployment.id
+  rest_api_id   = aws_api_gateway_rest_api.create_api.id
+  stage_name    = var.staging_env
+}
+
+#======root========#
+resource "aws_api_gateway_method" "proxy_root" {
+  rest_api_id   = aws_api_gateway_rest_api.create_api.id
+  resource_id   = aws_api_gateway_rest_api.create_api.root_resource_id
+  http_method   = "ANY"
+  authorization = "NONE"
+}
+
+#======root========#
+resource "aws_api_gateway_integration" "lambda_root" {
+  rest_api_id             = aws_api_gateway_rest_api.create_api.id
+  resource_id             = aws_api_gateway_method.proxy_root.resource_id
+  http_method             = aws_api_gateway_method.proxy_root.http_method
+  integration_http_method = "ANY"
+  type                    = "MOCK"
+  request_templates = {
+    "application/json" : "{ \"statusCode\": 301 }"
+  }
+}
+
 # api gateway deployment
 resource "aws_api_gateway_deployment" "gateway_deployment" {
   rest_api_id = aws_api_gateway_rest_api.create_api.id
@@ -46,12 +73,7 @@ resource "aws_api_gateway_deployment" "gateway_deployment" {
     create_before_destroy = true
   }
   depends_on = [
-    aws_api_gateway_method.get_method
+    aws_api_gateway_integration.lambda,
+    aws_api_gateway_integration.lambda_root
   ]
-}
-
-resource "aws_api_gateway_stage" "create_stage" {
-  deployment_id = aws_api_gateway_deployment.gateway_deployment.id
-  rest_api_id   = aws_api_gateway_rest_api.create_api.id
-  stage_name    = var.staging_env
 }
