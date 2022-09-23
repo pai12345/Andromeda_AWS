@@ -22,12 +22,6 @@ resource "aws_lb" "create_alb" {
   }
 }
 
-/* # attach target group to loadbalancer
-resource "aws_lb_target_group_attachment" "attach_targetgroup" {
-  target_group_arn = var.target_group_arn
-  target_id        = aws_lb.create_alb.arn
-} */
-
 # create alb listener
 resource "aws_lb_listener" "add_listener" {
   load_balancer_arn = aws_lb.create_alb.arn
@@ -43,22 +37,47 @@ resource "aws_lb_listener" "add_listener" {
   }
 }
 
-# add listener rule
+# add listener rule for application
 resource "aws_lb_listener_rule" "add_rule" {
   listener_arn = aws_lb_listener.add_listener.arn
   priority     = 1
   action {
     type             = "forward"
     target_group_arn = var.target_group_arn
-    forward {
+    /* forward {
       target_group {
         arn = var.target_group_arn
       }
-    }
+    } */
   }
   condition {
     path_pattern {
-      values = ["/"]
+      values = ["/commerce"]
+    }
+  }
+  tags = {
+    type    = "alb_listener_rule"
+    project = "Andromeda"
+  }
+}
+
+# add listener rule for fallback
+resource "aws_lb_listener_rule" "fallback_response" {
+  listener_arn = aws_lb_listener.add_listener.arn
+
+  action {
+    type = "fixed-response"
+
+    fixed_response {
+      content_type = "application/json"
+      message_body = "Service Not Found"
+      status_code  = "404"
+    }
+  }
+
+  condition {
+   path_pattern {
+      values = ["/*"]
     }
   }
   tags = {
