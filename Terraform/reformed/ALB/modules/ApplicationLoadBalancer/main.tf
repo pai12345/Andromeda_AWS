@@ -44,11 +44,6 @@ resource "aws_lb_listener_rule" "add_rule" {
   action {
     type             = "forward"
     target_group_arn = var.target_group_arn
-    /* forward {
-      target_group {
-        arn = var.target_group_arn
-      }
-    } */
   }
   condition {
     path_pattern {
@@ -76,7 +71,7 @@ resource "aws_lb_listener_rule" "fallback_response" {
   }
 
   condition {
-   path_pattern {
+    path_pattern {
       values = ["/*"]
     }
   }
