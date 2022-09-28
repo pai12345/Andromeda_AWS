@@ -6,6 +6,20 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
     "Version" : "2012-10-17",
     "Statement" : [
       {
+        "Sid" : "AllowCloudFrontServicePrincipal",
+        "Effect" : "Allow",
+        "Principal" : {
+          "Service" : "cloudfront.amazonaws.com"
+        },
+        "Action" : "s3:GetObject",
+        "Resource" : "arn:aws:s3:::mytestbucketpai1/*",
+        "Condition" : {
+          "StringLike" : {
+            "AWS:SourceArn" : "arn:aws:cloudfront::*:distribution/*"
+          }
+        }
+      },
+      /* {
         "Sid" : "AllowTLSRequestsOnly",
         "Effect" : "Deny",
         "Principal" : "*",
@@ -16,7 +30,7 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
             "aws:SecureTransport" : "false"
           }
         }
-      },
+      }, */
       {
         "Sid" : "Stmt1652430340613",
         "Action" : [
