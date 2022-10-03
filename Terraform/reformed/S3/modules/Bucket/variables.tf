@@ -1,6 +1,6 @@
 variable "bucketname" {
   description = "Bucket name"
-  default     = "mytestbucketpai1"
+  default     = "mytestbucketpai1.andromedatest.click"
 }
 
 variable "buckettags" {

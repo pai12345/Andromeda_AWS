@@ -12,7 +12,7 @@ resource "aws_s3_bucket_policy" "bucket_policy" {
           "Service" : "cloudfront.amazonaws.com"
         },
         "Action" : "s3:GetObject",
-        "Resource" : "arn:aws:s3:::mytestbucketpai1/*",
+        "Resource" : "arn:aws:s3:::mytestbucketpai1.andromedatest.click/*",
         "Condition" : {
           "StringLike" : {
             "AWS:SourceArn" : "arn:aws:cloudfront::*:distribution/*"
