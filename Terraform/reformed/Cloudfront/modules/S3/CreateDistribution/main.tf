@@ -1,3 +1,6 @@
+locals {
+  s3_origin_id = "s3-test-bucket"
+}
 data "aws_s3_bucket" "fetch_bucket" {
   bucket = "mytestbucketpai1.andromedatest.click"
 }
@@ -11,7 +14,7 @@ resource "aws_cloudfront_distribution" "create_distribution" {
   default_cache_behavior {
     allowed_methods        = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods         = ["HEAD", "GET"]
-    target_origin_id       = "s3-test-bucket"
+    target_origin_id       = local.s3_origin_id
     viewer_protocol_policy = "https-only"
     compress               = true
     forwarded_values {
@@ -25,7 +28,7 @@ resource "aws_cloudfront_distribution" "create_distribution" {
     connection_attempts      = 3
     connection_timeout       = 10
     domain_name              = data.aws_s3_bucket.fetch_bucket.bucket_regional_domain_name
-    origin_id                = "s3_origin_id"
+    origin_id                = local.s3_origin_id
     origin_access_control_id = var.origin_access_control_id
   }
   restrictions {
