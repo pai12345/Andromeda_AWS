@@ -21,3 +21,9 @@ output "output_ec2_create" {
   description = "Output for EC2 Instance"
   value       = aws_instance.ec2_create
 }
+
+# Output for aws_subnet
+output "output_aws_key_pair" {
+  description = "Output for fetching public key"
+  value       = data.aws_key_pair.get_key
+}

@@ -1,3 +1,8 @@
+data "aws_key_pair" "get_key" {
+  key_name           = "andr"
+  include_public_key = true
+}
+
 # fetch aws ami
 data "aws_ami" "ubuntu" {
   most_recent = true
@@ -40,7 +45,7 @@ resource "aws_subnet" "subnet_create" {
 resource "aws_security_group" "secgrp_create" {
   name        = "testgroup"
   description = "set traffic rules"
-  vpc_id      = aws_vpc.vpc_create.id
+  /* vpc_id      = aws_vpc.vpc_create.id */
 
   ingress {
     description      = "Inbound Traffic"
@@ -71,11 +76,17 @@ resource "aws_instance" "ec2_create" {
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = "t2.micro"
   associate_public_ip_address = true
-  subnet_id                   = aws_subnet.subnet_create.id
-  vpc_security_group_ids      = [aws_security_group.secgrp_create.id]
-  availability_zone           = "us-east-1a"
-  user_data                   = file("${path.module}/user_data/webserver.sh")
+  /* subnet_id                   = aws_subnet.subnet_create.id */
+  vpc_security_group_ids = [aws_security_group.secgrp_create.id]
+  availability_zone      = "us-east-1a"
+  user_data              = file("${path.module}/user_data/webserver.sh")
   credit_specification {
     cpu_credits = "standard"
+  }
+  iam_instance_profile = var.iam_instance_profile
+  key_name             = "andr"
+  tags = {
+    project = "andromeda"
+    type    = "ec2_instance"
   }
 }
