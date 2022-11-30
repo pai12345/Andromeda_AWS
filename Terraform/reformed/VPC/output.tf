@@ -11,3 +11,18 @@ output "output_generate_subnets" {
   sensitive   = false
   description = "Module Output for generating subnets"
 }
+
+#===================Output Module generating internet gateway=====================#
+output "output_generate_internet_gateway" {
+  value       = module.generate_internet_gateway
+  sensitive   = false
+  description = "Output for Module - generating internet gateway"
+}
+
+
+#===================Output Module generating EC2 instance=====================#
+output "output_generate_ec2" {
+  value       = module.generate_ec2
+  sensitive   = false
+  description = "Output for Module - generating EC2 instance"
+}
