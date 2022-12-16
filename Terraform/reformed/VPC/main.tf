@@ -1,6 +1,7 @@
 locals {
   vpc_id    = module.generate_vpc.output_andromeda_vpc.id
-  subnet_id = module.generate_subnets.output_andromeda_subnets[0].id
+  /* subnet_id = module.generate_subnets.output_andromeda_subnets[0].id */
+  subnet_id = module.generate_subnets.output_andromeda_subnets[1].id
 }
 
 # module to generate VPC
@@ -20,12 +21,22 @@ module "generate_internet_gateway" {
   vpc_id = local.vpc_id
 }
 
+# module to generate NAT Gateway
+module "generate_nat_gateway" {
+  source    = "./modules/NATGateway"
+  subnet_id = module.generate_subnets.output_andromeda_subnets[0].id
+  depends_on = [
+    module.generate_internet_gateway
+  ]
+}
+
 # module to generate Route Table
 module "generate_route_table" {
   source     = "./modules/RoutingTable"
   vpc_id     = local.vpc_id
-  gateway_id = module.generate_internet_gateway.output_andromeda_internet_gateway.id
-  subnet_id  = local.subnet_id
+  /* gateway_id = module.generate_internet_gateway.output_andromeda_internet_gateway.id */
+  nat_gateway_id = module.generate_nat_gateway.output_nat_gateway.id
+  subnet_id = local.subnet_id
 }
 
 # generate EC2 instance

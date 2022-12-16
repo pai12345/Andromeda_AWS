@@ -30,8 +30,12 @@ variable "subnets" {
     map_public_ip_on_launch = bool
   }))
   default = [
-   {
+    {
       cidr_block              = "10.0.3.0/24",
       map_public_ip_on_launch = true
+    },
+    {
+      cidr_block              = "10.0.2.0/24",
+      map_public_ip_on_launch = false
   }]
 }

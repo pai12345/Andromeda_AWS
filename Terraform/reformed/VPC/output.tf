@@ -26,6 +26,12 @@ output "output_generate_route_table" {
   description = "Output for Module - generating Route Table"
 }
 
+#===================Output Module - generating NAT Gateway=====================#
+output "output_generate_nat_gateway" {
+  value       = module.generate_nat_gateway
+  sensitive   = false
+  description = "Output for Module - generating NAT Gateway"
+}
 
 #===================Output Module - generating EC2 instance=====================#
 output "output_generate_ec2" {
