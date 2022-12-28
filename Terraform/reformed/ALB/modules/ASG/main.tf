@@ -1,7 +1,7 @@
 # fetch launch template
 data "aws_launch_template" "fetch_template" {
   /* name = var.launch_template_name */
-  id = "lt-0f0628394cbdd59c3"
+  id = "lt-0d578541243d8e93f"
 }
 
 # create autoscaling group
