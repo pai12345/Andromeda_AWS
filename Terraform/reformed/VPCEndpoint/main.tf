@@ -39,8 +39,8 @@ module "generate_ec2" {
   ]
 }
 
-# generate S3 VPC Interface Endpoint
-module "generate_s3_vpcendpoint" {
+# generate VPC Interface Endpoint
+module "generate_vpcendpoint" {
   source             = "./modules/Interfaceendpoint"
   vpc_id             = local.vpc_id
   subnet_ids         = [module.generate_subnets.output_andromeda_subnets[1].id]

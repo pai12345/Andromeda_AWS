@@ -33,9 +33,9 @@ output "output_generate_ec2" {
   description = "Output for Module - generating EC2 instance"
 }
 
-#===================Output Module - generating S3 VPC Interface Endpoint=====================#
-output "output_generate_s3_vpcendpoint" {
-  value       = module.generate_s3_vpcendpoint
+#===================Output Module - generating VPC Interface Endpoint=====================#
+output "output_generate_vpcendpoint" {
+  value       = module.generate_vpcendpoint
   sensitive   = false
-  description = "Output Module - generating S3 VPC Interface Endpoint"
+  description = "Output Module - generating VPC Interface Endpoint"
 }
