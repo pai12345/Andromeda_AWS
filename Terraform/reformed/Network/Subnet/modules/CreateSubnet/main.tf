@@ -19,6 +19,7 @@ resource "aws_subnet" "andromeda_subnets" {
   map_public_ip_on_launch             = each.value.map_public_ip_on_launch
   private_dns_hostname_type_on_launch = "resource-name"
   tags = {
+    tier    = each.value.tier
     type    = "subnet"
     project = "andromeda"
   }
